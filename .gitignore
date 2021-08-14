@@ -16,3 +16,6 @@
 
 # Config
 config.yaml
+
+# DB
+media.db
