@@ -4,6 +4,8 @@ import (
 	"time"
 
 	"gorm.io/gorm"
+
+	"github.com/yamachoo/media_back/db"
 )
 
 type Picture struct {
@@ -16,4 +18,8 @@ type Picture struct {
 	Picture   []byte         `gorm:"not null"`
 	Likes     []Like         `gorm:"foreignKey:PictureId"`
 	Comments  []Comment      `gorm:"foreignKey:PictureId"`
+}
+
+func init() {
+	db.AutoMigrateDB(&Picture{})
 }

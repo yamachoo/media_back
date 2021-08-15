@@ -5,7 +5,6 @@ import (
 	"gorm.io/gorm"
 
 	"github.com/yamachoo/media_back/config"
-	"github.com/yamachoo/media_back/models"
 )
 
 var db *gorm.DB
@@ -17,10 +16,12 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-
-	db.AutoMigrate(&models.User{}, &models.Picture{}, &models.Like{}, &models.Comment{})
 }
 
 func GetDB() *gorm.DB {
 	return db
+}
+
+func AutoMigrateDB(models ...interface{}) {
+	db.AutoMigrate(models...)
 }

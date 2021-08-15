@@ -1,6 +1,10 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+
+	"github.com/yamachoo/media_back/db"
+)
 
 type User struct {
 	gorm.Model
@@ -10,4 +14,8 @@ type User struct {
 	Pictures []Picture `gorm:"foreignKey:UserId"`
 	Likes    []Like    `gorm:"foreignKey:UserId"`
 	Comments []Comment `gorm:"foreignKey:UserId"`
+}
+
+func init() {
+	db.AutoMigrateDB(&User{})
 }
