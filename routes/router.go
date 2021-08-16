@@ -1,17 +1,17 @@
 package routes
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"github.com/yamachoo/media_back/api"
 )
 
 func SetupRouter() *gin.Engine {
 	router := gin.Default()
-	router.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "hello world",
-		})
-	})
+
+	v1 := router.Group("/api/v1")
+	{
+		v1.POST("/resister", api.Register)
+	}
+
 	return router
 }
