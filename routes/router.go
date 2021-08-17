@@ -7,6 +7,7 @@ import (
 
 	"github.com/yamachoo/media_back/api"
 	"github.com/yamachoo/media_back/config"
+	"github.com/yamachoo/media_back/middleware"
 )
 
 func SetupRouter() *gin.Engine {
@@ -15,11 +16,15 @@ func SetupRouter() *gin.Engine {
 	store := cookie.NewStore([]byte(c.GetString("router.cookie")))
 	router.Use(sessions.Sessions(c.GetString("router.session"), store))
 
-	v1 := router.Group("/api/v1")
+	open := router.Group("/api/v1")
 	{
-		v1.POST("/resister", api.Register)
-		v1.POST("/login", api.Login)
-		v1.GET("/logout", api.Logout)
+		open.POST("/resister", api.Register)
+		open.POST("/login", api.Login)
+	}
+
+	auth := open.Group("/", middleware.LoginCheck())
+	{
+		auth.GET("/logout", api.Logout)
 	}
 
 	return router
