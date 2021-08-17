@@ -28,3 +28,10 @@ func (u *User) Create() error {
 	db := db.GetDB()
 	return db.Create(u).Error
 }
+
+func GetUserByEmail(email string) (User, error) {
+	var user User
+	db := db.GetDB()
+	result := db.Where(&User{Email: email}).First(&user)
+	return user, result.Error
+}
