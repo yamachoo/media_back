@@ -19,6 +19,7 @@ func SetupRouter() *gin.Engine {
 	{
 		v1.POST("/resister", api.Register)
 		v1.POST("/login", api.Login)
+		v1.GET("/logout", api.Logout)
 	}
 
 	return router

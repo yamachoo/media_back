@@ -78,3 +78,11 @@ func Login(c *gin.Context) {
 
 	c.Status(http.StatusOK)
 }
+
+func Logout(c *gin.Context) {
+	session := sessions.Default(c)
+	session.Clear()
+	session.Save()
+
+	c.Status(http.StatusOK)
+}
