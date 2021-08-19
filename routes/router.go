@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
@@ -15,6 +16,7 @@ func SetupRouter() *gin.Engine {
 	router := gin.Default()
 	store := cookie.NewStore([]byte(c.GetString("router.cookie")))
 	router.Use(sessions.Sessions(c.GetString("router.session"), store))
+	router.Use(cors.Default())
 
 	open := router.Group("/api/v1")
 	{
