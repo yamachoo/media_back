@@ -20,7 +20,7 @@ func SetupRouter() *gin.Engine {
 
 	open := router.Group("/api/v1")
 	{
-		open.POST("/resister", api.Register)
+		open.POST("/register", api.Register)
 		open.POST("/login", api.Login)
 	}
 
