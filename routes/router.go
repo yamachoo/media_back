@@ -16,7 +16,11 @@ func SetupRouter() *gin.Engine {
 	router := gin.Default()
 	store := cookie.NewStore([]byte(c.GetString("router.cookie")))
 	router.Use(sessions.Sessions(c.GetString("router.session"), store))
-	router.Use(cors.Default())
+
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:3000"}
+	config.AllowCredentials = true
+	router.Use(cors.New(config))
 
 	open := router.Group("/api/v1")
 	{
