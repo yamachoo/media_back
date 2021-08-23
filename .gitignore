@@ -1,3 +1,10 @@
+.DS_Store
+config.yaml
+media.db
+pictures/*
+
+!.gitkeep
+
 # Binaries for programs and plugins
 *.exe
 *.exe~
@@ -13,9 +20,3 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
-
-# Config
-config.yaml
-
-# DB
-media.db
