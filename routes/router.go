@@ -31,7 +31,7 @@ func SetupRouter() *gin.Engine {
 	auth := open.Group("/", middleware.LoginCheck())
 	{
 		auth.GET("/logout", api.Logout)
-		auth.POST("/picture", api.CreatePicture)
+		auth.POST("/pictures", api.CreatePicture)
 	}
 
 	return router
