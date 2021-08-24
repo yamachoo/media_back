@@ -32,3 +32,12 @@ func (p *Picture) Create() error {
 	db := db.GetDB()
 	return db.Create(p).Error
 }
+
+func CheckPictureById(id string) bool {
+	var picture Picture
+	db := db.GetDB()
+	if result := db.Where(&Picture{ID: id}).First(&picture); result.Error != nil {
+		return false
+	}
+	return true
+}

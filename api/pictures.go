@@ -24,10 +24,14 @@ func CreatePicture(c *gin.Context) {
 		return
 	}
 
-	id, err := utils.MakeRandomStr(8)
-	if err != nil {
-		c.Status(http.StatusBadRequest)
-		return
+	var id string
+	for exist := true; exist; {
+		id, err = utils.MakeRandomStr(8)
+		if err != nil {
+			c.Status(http.StatusBadRequest)
+			return
+		}
+		exist = models.CheckPictureById(id)
 	}
 
 	data, err := base64.StdEncoding.DecodeString(req.Picture)
