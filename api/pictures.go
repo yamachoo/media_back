@@ -40,7 +40,7 @@ func CreatePicture(c *gin.Context) {
 		return
 	}
 
-	path := "pictures/" + id + ".jpg"
+	path := "/static/pictures/" + id + ".jpg"
 	err = os.WriteFile(path, data, os.ModePerm)
 	if err != nil {
 		c.Status(http.StatusBadRequest)

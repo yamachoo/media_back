@@ -22,6 +22,8 @@ func SetupRouter() *gin.Engine {
 	config.AllowCredentials = true
 	router.Use(cors.New(config))
 
+	router.Static("/static/pictures", "./pictures")
+
 	open := router.Group("/api/v1")
 	{
 		open.POST("/register", api.Register)
