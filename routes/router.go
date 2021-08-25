@@ -26,6 +26,7 @@ func SetupRouter() *gin.Engine {
 	{
 		open.POST("/register", api.Register)
 		open.POST("/login", api.Login)
+		open.GET("/pictures", api.GetPictures)
 	}
 
 	auth := open.Group("/", middleware.LoginCheck())

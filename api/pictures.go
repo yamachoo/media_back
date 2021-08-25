@@ -62,3 +62,15 @@ func CreatePicture(c *gin.Context) {
 
 	c.Status(http.StatusOK)
 }
+
+func GetPictures(c *gin.Context) {
+	pictures, err := models.GetPictures()
+	if err != nil {
+		c.Status(http.StatusBadRequest)
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"pictures": pictures,
+	})
+}
