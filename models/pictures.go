@@ -9,15 +9,15 @@ import (
 )
 
 type Picture struct {
-	ID        string `gorm:"primarykey"`
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt gorm.DeletedAt `gorm:"index"`
-	UserId    uint           `gorm:"not null" binding:"required"`
-	Filename  string         `gorm:"not null" binding:"required,max=100,min=1"`
-	Path      string         `gorm:"not null" binding:"required"`
-	Likes     []Like         `gorm:"foreignKey:PictureId" binding:"-"`
-	Comments  []Comment      `gorm:"foreignKey:PictureId" binding:"-"`
+	ID        string         `json:"id" gorm:"primarykey"`
+	CreatedAt time.Time      `json:"-"`
+	UpdatedAt time.Time      `json:"-"`
+	DeletedAt gorm.DeletedAt `json:"-" gorm:"index"`
+	UserId    uint           `json:"userId" gorm:"not null" binding:"required"`
+	Filename  string         `json:"filename" gorm:"not null" binding:"required,max=100,min=1"`
+	Path      string         `json:"path" gorm:"not null" binding:"required"`
+	Likes     []Like         `json:"likes" gorm:"foreignKey:PictureId" binding:"-"`
+	Comments  []Comment      `json:"comments" gorm:"foreignKey:PictureId" binding:"-"`
 }
 
 func init() {
@@ -40,4 +40,11 @@ func CheckPictureById(id string) bool {
 		return false
 	}
 	return true
+}
+
+func GetPictures() ([]Picture, error) {
+	var pictures []Picture
+	db := db.GetDB()
+	result := db.Find(&pictures)
+	return pictures, result.Error
 }
