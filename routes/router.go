@@ -24,17 +24,17 @@ func SetupRouter() *gin.Engine {
 
 	router.Static("/static/pictures", "./pictures")
 
-	open := router.Group("/api/v1")
+	public := router.Group("/api/v1")
 	{
-		open.POST("/register", api.Register)
-		open.POST("/login", api.Login)
-		open.GET("/pictures", api.GetPictures)
+		public.POST("/register", api.Register)
+		public.POST("/login", api.Login)
+		public.GET("/pictures", api.GetPictures)
 	}
 
-	auth := open.Group("/", middleware.LoginCheck())
+	private := public.Group("/", middleware.LoginCheck())
 	{
-		auth.GET("/logout", api.Logout)
-		auth.POST("/pictures", api.CreatePicture)
+		private.GET("/logout", api.Logout)
+		private.POST("/pictures", api.CreatePicture)
 	}
 
 	return router
