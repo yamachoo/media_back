@@ -70,7 +70,5 @@ func GetPictures(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"pictures": pictures,
-	})
+	c.JSON(http.StatusOK, pictures)
 }
