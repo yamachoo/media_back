@@ -40,7 +40,7 @@ func CreatePicture(c *gin.Context) {
 		return
 	}
 
-	path := "/static/pictures/" + id + ".jpg"
+	path := "pictures/" + id + ".jpg"
 	err = os.WriteFile(path, data, os.ModePerm)
 	if err != nil {
 		c.Status(http.StatusBadRequest)
@@ -52,7 +52,7 @@ func CreatePicture(c *gin.Context) {
 		ID:       id,
 		UserId:   session.Get("userId").(uint),
 		Filename: req.Filename,
-		Path:     path,
+		Path:     "/static/" + path,
 	}
 	err = picture.Create()
 	if err != nil {
