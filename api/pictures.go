@@ -72,3 +72,15 @@ func GetPictures(c *gin.Context) {
 
 	c.JSON(http.StatusOK, pictures)
 }
+
+func GetPicture(c *gin.Context) {
+	id := c.Param("id")
+
+	picture, err := models.GetPicture(id)
+	if err != nil {
+		c.Status(http.StatusBadRequest)
+		return
+	}
+
+	c.JSON(http.StatusOK, picture)
+}

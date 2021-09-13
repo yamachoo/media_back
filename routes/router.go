@@ -29,6 +29,7 @@ func SetupRouter() *gin.Engine {
 		public.POST("/register", api.Register)
 		public.POST("/login", api.Login)
 		public.GET("/pictures", api.GetPictures)
+		public.GET("/pictures/:id", api.GetPicture)
 	}
 
 	private := public.Group("/", middleware.LoginCheck())
