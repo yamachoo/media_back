@@ -48,3 +48,10 @@ func GetPictures() ([]Picture, error) {
 	result := db.Find(&pictures)
 	return pictures, result.Error
 }
+
+func GetPicture(id string) (Picture, error) {
+	var picture Picture
+	db := db.GetDB()
+	result := db.Where(&Picture{ID: id}).First(&picture)
+	return picture, result.Error
+}
